@@ -1,11 +1,14 @@
 from django.urls import path
 # import Home view from the views file
-from .views import Home, CameraList, CameraDetail, UploadListCreate, UploadDetail, FilmList, FilmDetail, AddFilmToCamera, RemoveFilmFromCamera # additional imports
+from .views import Home, CameraList, CameraDetail, UploadListCreate, UploadDetail, FilmList, FilmDetail, AddFilmToCamera, RemoveFilmFromCamera, CreateUserView, LoginView, VerifyUserView # additional imports
 # TODO: Make O-2-M views for UploadList/UploadDetail
 
-urlpatterns = [
+urlpatterns = [   
     path('', Home.as_view(), name='home'),
         # new routes below 
+    path('users/register/', CreateUserView.as_view(), name='register'),
+    path('users/login/', LoginView.as_view(), name='login'),
+    path('users/token/refresh/', VerifyUserView.as_view(), name='token_refresh'),
     path('cameras/', CameraList.as_view(), name='camera-list'),
     path('cameras/<int:id>/', CameraDetail.as_view(), name='camera-detail'),
     path('cameras/<int:camera_id>/uploads/', UploadListCreate.as_view(), name='upload-list'),

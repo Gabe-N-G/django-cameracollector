@@ -1,5 +1,6 @@
 from django.db import models
-
+from datetime import date
+from django.contrib.auth.models import User
 # Create your models here.
 PROC = (
     ('UPL', 'Upload'),
@@ -36,6 +37,8 @@ class Camera(models.Model):
     year_made = models.IntegerField()
     
     films = models.ManyToManyField(Film)
+    users = models.ForeignKey(User, on_delete=models.CASCADE)
+    # makes all cameras delete if user is gone.
 
     def __str__(self):
         return self.name
